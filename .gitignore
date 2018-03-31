@@ -1,0 +1,24 @@
+# Folder view configuration files
+.DS_Store
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Editor
+*.sublime-*
+
+# Package Control
+Package Control.last-run
+Package Control.cache
+Package Control.ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+Package Control.merged-ca-bundle
+Package Control.system-ca-bundle
+Package Control.user-ca-bundle
