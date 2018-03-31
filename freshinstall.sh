@@ -38,6 +38,8 @@ e_header '💾 Installing Applications and command line tools'
 # restore installed apps
 brew bundle
 mas install 425955336 # Skitch
+mas install 1091189122 # Bear
+mas install 918858936 # Airmail
 
 # Remove outdated versions from the cellar.
 brew cleanup
@@ -70,7 +72,7 @@ export PATH=/usr/local/bin:$PATH
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.dotfiles/.{alias}; do
+for file in ~/.{alias, extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -82,29 +84,27 @@ archey -c
 EOT
 
 e_header '✅ Everything should be installed now'
-e_header 'Enjoy your freshly installed Mac '
-
 
 # Variables
-dir=/Volumes/GoogleDrive/My\ Drive/Projects/dotfiles
 files="gitignore alias" # files to symlink
+dir=$PWD/sublime3/User
 sublimedir=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
 # Create symlinks for dotfiles in ~
 for file in $files; do
     e_header "⚡ Creating symlink to $file in home directory."
-    ln -s $dir/.$file ~/.$file
+    ln -s "$PWD/.$file" ~/.$file
 done;
 e_header "...done"
 
-# Create symlin for Sublime Text User directory
+# Create symlink for Sublime Text User directory
 e_header "⚡ Creating symlink to User in $sublimedir"
-rm -rf $sublimedir
-ln -s $dir/sublime3/User $sublimedir
+rm -rf "$sublimedir"
+ln -s "$dir" "$sublimedir"
 e_header "...done"
 
 
-ln -s $dir/seeyouspacecowboy.sh ~/seeyouspacecowboy.sh
+ln -s seeyouspacecowboy.sh ~/seeyouspacecowboy.sh
 
 # make sure seeyouspacecowboy is called on EXIT
 # echo 'sh ~/seeyouspacecowboy.sh; sleep 2' >> ~/.bash_logout
@@ -116,6 +116,8 @@ EOT
 source ~/.bash_profile
 
 e_header '🍺  you did it! 🍺'
+e_header 'Enjoy your freshly installed Mac '
+
 
 # byebye
 . seeyouspacecowboy.sh
