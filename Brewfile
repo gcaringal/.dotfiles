@@ -2,7 +2,7 @@
 cask_args appdir: "/Applications"
 
 
-# install scripts we want
+# Install scripts we want
 brew "archey"
 brew "git"
 brew "mas"
@@ -14,19 +14,33 @@ brew "pkg-config"
 brew "libpng"
 brew "freetype"
 
-# get brew cask for apps
+# Utility to download content from youtube, the latast Tatort or whatever
+# else you want to watch offline
+brew 'youtube-dl'
+
+# Get brew cask for apps
 tap "caskroom/cask"
 
 
-# install the apps we want
+# Install the apps we want
+cask "iterm2"
 cask "google-chrome"
 cask "vlc"
 cask "dropbox"
 cask "spotify"
 cask "sublime-text"
-cask "evernote"
 cask "skype"
 cask "typora"
 cask "skitch"
 cask "teamviewer"
-casl "grandperspective"
+cask "grandperspective"
+cask "adobe-creative-cloud"
+cask "qbittorrent"
+cask "the-unarchiver"
+cask "appcleaner"
+cask "osxfuse"
+cask "font-source-code-pro"
+cask "plex-media-server"
+cask "qlmarkdown"
+cask "qlstephen"
+cask "qlcolorcode"

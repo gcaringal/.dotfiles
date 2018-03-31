@@ -87,13 +87,13 @@ e_header 'Enjoy your freshly installed Mac '
 
 # Variables
 dir=/Volumes/GoogleDrive/My\ Drive/Projects/dotfiles
-files="alias" # files to symlink
+files="gitignore alias" # files to symlink
 sublimedir=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
 # Create symlinks for dotfiles in ~
 for file in $files; do
     e_header "⚡ Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+    ln -s $dir/.$file ~/.$file
 done;
 e_header "...done"
 
