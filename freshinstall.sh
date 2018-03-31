@@ -30,33 +30,81 @@ brew tap Homebrew/bundle
 e_header '🍎 Installing Mas'
 brew install mas
 
-e_header '🍏 Enter your apple id, followed by [ENTER]:'
+e_header ' Enter your AppleID followed by [ENTER]:'
 read appleid
 mas signin $appleid
 
 e_header '💾 Installing Applications and command line tools'
 # restore installed apps
 brew bundle
-mas install 425955336
+mas install 425955336 # Skitch
+
+# Remove outdated versions from the cellar.
+brew cleanup
+
+e_header '💾 Installed all apps and tools from Brewfile'
+
 
 e_header '💾 Installing Python dependencies'
 brew install sip --with-python3
-pip3 install numpy scipy matplotlib pandas sympy nose seaborn pvlib xlrd
+pip3 install numpy scipy matplotlib pandas sympy nose seaborn pvlib xlrd jupyter
+
+e_header '💾 Creates a backup of you current .bash_profile'
+# backup .bash_prfole
+cat ~/.bash_profile > ~/.bash_profile.backup
 
 e_header '🖌 Creating a new .bash_profile'
 # create new bash profile
 cat >~/.bash_profile <<'EOT'
+# Change prompt
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\W\$(parse_git_branch)\[\033[m\]\$ "
+
 # Add `~/bin` to the `$PATH`
 export PATH=/usr/local/bin:$PATH
 
-# say -v "Zarvox" "hello {$USER}, I'm a new terminal" &
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don’t want to commit.
+for file in ~/.dotfiles/.{alias}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+
+say -v "Zarvox" "hello Gideon, I'm a new terminal" &
 # Show archey on bootup
-say -v "Zarvox" "new terminal" &
+# say -v "Zarvox" "new terminal" &
 archey -c
 EOT
 
 e_header '✅ Everything should be installed now'
 e_header 'Enjoy your freshly installed Mac '
+
+
+# Variables
+dir=/Volumes/GoogleDrive/My\ Drive/Projects/dotfiles
+files="alias" # files to symlink
+sublimedir=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+
+# Create symlinks for dotfiles in ~
+for file in $files; do
+    e_header "⚡ Creating symlink to $file in home directory."
+    ln -s $dir/$file ~/.$file
+done;
+e_header "...done"
+
+# Create symlin for Sublime Text User directory
+e_header "⚡ Creating symlink to User in $sublimedir"
+rm -rf $sublimedir
+ln -s $dir/sublime3/User $sublimedir
+e_header "...done"
+
+
+ln -s $dir/seeyouspacecowboy.sh ~/seeyouspacecowboy.sh
 
 # make sure seeyouspacecowboy is called on EXIT
 # echo 'sh ~/seeyouspacecowboy.sh; sleep 2' >> ~/.bash_logout
