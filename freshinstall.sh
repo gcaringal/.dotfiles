@@ -39,7 +39,6 @@ e_header '💾 Installing Applications and command line tools'
 brew bundle
 mas install 425955336 # Skitch
 mas install 1091189122 # Bear
-mas install 918858936 # Airmail
 
 # Remove outdated versions from the cellar.
 brew cleanup
@@ -77,7 +76,7 @@ for file in ~/.{alias, extra}; do
 done;
 unset file;
 
-say -v "Zarvox" "hello Gideon, I'm a new terminal" &
+# say -v "Zarvox" "hello Gideon, I'm a new terminal" &
 # Show archey on bootup
 # say -v "Zarvox" "new terminal" &
 archey -c
@@ -99,9 +98,17 @@ e_header "...done"
 
 # Create symlink for Sublime Text User directory
 e_header "⚡ Creating symlink to User in $sublimedir"
+# $sublimedir does not exist until the app has been opened the first time. 
+e_header ""
+subl
+
+if ( ! dialog --yesno "Opening Sublime Text 3...\nInstall Package Control under Tools and Material Theme\nAre you ready to continue? 😁" 8 70) then
+    return;
+fi;
+
 rm -rf "$sublimedir"
 ln -s "$dir" "$sublimedir"
-e_header "...done"
+e_header "Sublime setup done"
 
 
 ln -s seeyouspacecowboy.sh ~/seeyouspacecowboy.sh

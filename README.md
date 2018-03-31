@@ -152,9 +152,6 @@ This will check to see if home-brew is installed, and install it if it isn't alr
 After running `freshinstall.sh` there are still a couple of things that need to be done.
 
 * Set up iTerm2 or Terminal.app profile (see details below).
-* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, and `~/.zshrc.local`.
-* Complete [Brew Bundle][brew-bundle] with `brew bundle install`
-* After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
 
 ## Setting up iTerm2
 
