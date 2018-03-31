@@ -7,7 +7,7 @@ This repository serves as my way to help me setup and maintain my environment on
 My goal is to be able to just:
 
 - Open Safari on the new factory-setup macOS.
-- Download Dropbox/Google Drive.
+- Download Dropbox/Google Drive and sync necessary files.
 - Type: `. freshinstall.sh` (don't forget the `.` before install) followed by [ENTER ↵].
 - Sit back and have a complete macOS environment set up and ready to use.
 
@@ -15,38 +15,26 @@ Following open source tools are used to automate the Mac fresh install:
 
 - Installing Binaries with [homebrew](http://brew.sh/)
 - Installing Apps with [homebrew cask](http://caskroom.io/)
-- Backing up and Restoring Configuration with [mackup](https://github.com/lra/mackup)
+- TO DO: Backing up and Restoring Configuration with [mackup](https://github.com/lra/mackup)
 - Solid Mac defaults for hackers using [osx-for-hackers.sh](https://gist.github.com/brandonb927/3195465) (modified)
 - Bringing it all together with [dots](https://github.com/matthewmueller/dots)
 
 
 
-## Section 1: System 
+#### Section 1: System 
 
-* [System Preferences](#system-preferences)
-* [Show Library folder](#show-library-folder)
-* [Terminal Colors](#terminal-colors)
+* ##### [System Preferences](#system-preferences)
+* ##### [Show Library folder](#show-library-folder)
 
-## Section 2
+#### Section 2: Apps and Tools Settings
 
-* ​
+* ##### [Google Chrome](#google-chrome)
+* ##### [Git](#git)
+* ##### [Python](#python)
 
-## Section 3: Apps and Tools Settings
+#### Section 3: Installation
 
-* [Google Chrome](#google-chrome)
-* [Git](#git)
-* [Sublime Text](#sublime-text)
-* [MAMP](#mamp)
-* [Gulp](#gulp)
-* [Python](#python)
-* [Pip](#pip)
-* [Virtualenv](#virtualenv)
-* [Virtualenvwrapper](#virtualenvwrapper)
-* [Useful Apps](#useful-apps)
-
-## Section 4: Automation
-
-- [Install script](#install-script)
+- ##### [Install script](#install-script)
 
 ## Section 1: System
 
@@ -67,29 +55,19 @@ In **Apple Icon > System Preferences**:
   - Bottom right: Desktop
 - Sound > Show volume in menu bar
 
-### Show Library folder
+## Section 2: Apps and Tools Settings
+These are some commands or settings that I want to remember and were setup before the environment automation. 
 
-```sh
-$ chflags nohidden ~/Library
-```
+### iTerm2
+##### Cursor Guide (from [Joe Wroten](https://wrotenwrites.com/a_modern_terminal_workflow_5/))
+Even self proclaimed terminal pro’s who claim to never lose track of their cursor should do themselves a favor and enable iTerm2’s cursor guide. Subconciously a gentle highlight of the current line will draw your eye right to where you need to be.
 
-### Terminal Colors
+1. Profiles tab
+1. Colors sub-tab
+1. “Cursor Guide”
+1. Set color (I prefer 255, 255, 255, 35)
 
-I like to set a color scheme for my terminal.  Download [Solarized](https://github.com/tomislav/osx-terminal.app-colors-solarized) and extract. Double click on selected ***.terminal** file. It will open a new Terminal window with that color scheme. 
-
-Set the scheme as the default one with **Shell > Use Settings as Default**
-
-## Section 2
-
-## Section 3: Apps and Tools Settings
-
-### Google Chrome
-
-Sign into Google account to sync settings and bookmarks.
-
-### Git
-
-#### SSH
+### SSH
 
 Ensure that SSH is installed: 
 
@@ -108,12 +86,12 @@ If no files exist, create a new default identity:
 ```shell
 $ ssh-keygen
 Generating public/private rsa key pair.
-Enter file in which to save the key (/Users/emmap1/.ssh/id_rsa):
+Enter file in which to save the key (/Users/user/.ssh/id_rsa):
 ```
 
 Press the Enter or Return key to accept the default location. Enter and re-enter a passphrase when prompted. List the contents of `~/.ssh` to view the key files.
 
-#### Bitbucket
+### Bitbucket
 
 1. From Bitbucket Cloud, choose **avatar > Bitbucket settings** from the application menu. 
    The system displays the **Account settings** page.
@@ -134,77 +112,8 @@ Press the Enter or Return key to accept the default location. Enter and re-enter
 6. Press **Add key**.
    The system adds the key to your account. Bitbucket sends you an email to confirm addition of the key. 
 
-### Sublime Text
-
-#### Theme
-
-##### Installation
-
-You can install `ayu` via [Package Control](https://packagecontrol.io/).
-
-1. Press cmd/ctrl + shift + p to open the command palette.
-2. Type `install package` and press enter. Then search for `ayu`
-
-**Sublime Text > Preferences > Settings - User**
-
-For light theme:
-
-```
-"theme": "ayu-light.sublime-theme",
-"color_scheme": "Packages/ayu/ayu-light.tmTheme",
-```
-
-For mirage theme:
-
-```
-"theme": "ayu-mirage.sublime-theme",
-"color_scheme": "Packages/ayu/ayu-mirage.tmTheme",
-```
-
-For dark theme:
-
-```
-"theme": "ayu-dark.sublime-theme",
-"color_scheme": "Packages/ayu/ayu-dark.tmTheme",
-```
-
-#### Install Packages
-
-[Scilab Syntax Highlighter](https://github.com/holgern/sublime-scilab) Activate via ``View > Syntax > scilab``.
-
-
-
-### MAMP
-
-- `cp -r /Applications/MAMP/db dbfolder` (copies it into a new folder within)
-- `rm -rf /Applications/MAMP/db` (remove the database from MAMP folder)
-- `ln -s ~/Dropbox/Development/db /Applications/MAMP/db` (creates a direct link for MAMP without getting hands deep in coding)
-- Start up MAMP (If already started, just restart as it will then get the new MySQL route)
-- Feel much more secure
-
-In order to make Dropbox the location of your Mamp locals, move your all of your files to the folder of your choice and, starting Mamp, go to preferences, Web server, and Document root to change it to the new one.
-
-There was an error that kept occurringm, which was that mysql server would not startup. A solution that worked was to change the Dropbox folder ``db/mysql`` to ``db/mysql56``, just as it looks with the default MAMP installation. 
-
-### Gulp
-
-Launch your Terminal app and install gulp globally.
-
-```shell
-$ npm install --global gulp-cli
-```
 
 ### Python
-
-Most thorough installation steps and explanation is provided by [David Culley](https://www.davidculley.com/installing-python-on-a-mac).
-
-Install Python 3 via:
-
-```
-brew install python3
-```
-
-Otherwise it's also included in the Brewfile.
 
 ##### Updating Pip
 
@@ -214,21 +123,7 @@ Conveniently, `pip` is already installed, since it [comes bundled](https://pip.p
 $ pip3 install --upgrade pip setuptools wheel
 ```
 
-
-
-```sh
-$ brew install qt5
-$ brew install sip --with-python3
-$ brew install pyqt5
-$ brew install pkg-config libpng freetype
-$ pip3 install numpy scipy matplotlib pandas sympy nose
-```
-
 ##### Jupyter Notebook
-
-```sh
-$ pip3 install jupyter
-```
 
 To test whether everything worked out, you can either try to simply open Qt Console
 
@@ -242,23 +137,45 @@ or run IPython’s test suite:
 $ iptest
 ```
 
-###  Useful Apps
+## Installation
 
-Here is a quick list of some useful apps:
+cd to the correct directory then
 
-* [Dropbox](https://www.dropbox.com/): File syncing to the cloud. I put all my documents in Dropbox. It syncs them to all my devices (laptop, mobile, tablet), and serves as a backup as well. **(Free for 2GB)**
+```bash
+. freshinstall.sh
+```
 
-- [Scroll Reverser](https://pilotmoon.com/scrollreverser/): Reverse horizontal scrolling when using a mouse. **(Free)**
-- [Typora](https://typora.io/): Minimalistic Electron-based editor for Mac, Windows and Linux; includes live preview. **(Free while in beta)**
-- [Inkscape](https://inkscape.org/en/download/mac-os/): A powerful vector design tool. **(Free)**
-- [Wunderlist](https://www.wunderlist.com/download/) List-making app. **(Free)**
+This will check to see if home-brew is installed, and install it if it isn't already. 
 
+## Post-install Tasks
 
-## Automation
+After running `freshinstall.sh` there are still a couple of things that need to be done.
 
-### Install script
+* Set up iTerm2 or Terminal.app profile (see details below).
+* Add personal data to `~/.gitconfig.local`, `~/.vimrc.local`, and `~/.zshrc.local`.
+* Complete [Brew Bundle][brew-bundle] with `brew bundle install`
+* After opening Neovim, run [`:checkhealth`][checkhealth] and resolve errors/warnings.
 
-To automate the whole process, create a `freshinstall.sh` script. This will check to see if home-brew is installed, and install it if it isn't already. 
+## Setting up iTerm2
+
+Here are the steps to quickly set up iTerm2 by importing a profile.
+
+1. Open iTerm2.
+1. Select iTerm2 > Preferences.
+1. Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
+1. Press "Browse" and point it to `~/dotfiles/iterm2/com.googlecode.iterm2.plist`.
+1. Restart iTerm2.
+
+## Setting up Terminal.app
+
+Getting set up after a fresh install is simple.
+
+1. Open Terminal.app.
+1. Select Terminal > Preferences. (But really you'll just press &#8984;, right? So much faster.)
+1. Select the Profiles tab.
+1. Click the gear icon and select Import...
+1. Select `~/dotfiles/terminal/<desired-profile>.terminal` and click Open.
+1. Click the Default button to keep using this profile in new Terminal windows.
 
 ## Acknowledgements
 
